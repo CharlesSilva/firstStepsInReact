@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>hello World React</title>
+  </head>
+  <body>
+    <main id ="app">
+
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.js"></script>
+    <script type="text/babel">
+      function Hola(props){
+        const name = props.name;
+        return (
+          <h1 id="Title">
+            hey {name}
+          </h1>
+        )
+      }
+      const hola = React.createElement(Hola,{
+        name: 'carlos' ,
+      });
+      ReactDOM.render(
+        <Hola name="jsx" />,
+        document.getElementById("app")
+      );
+
+      setTimeout(
+        () => {
+          ReactDOM.render(
+            <Hola name="azopotamadre tambien el jsx cambio a los 3 segundos" />,
+            document.getElementById("app")
+          );
+        },
+        3000
+      );
+
+
+    </script>
+  </body>
+</html>
