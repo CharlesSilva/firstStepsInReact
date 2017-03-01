@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Creating components</title>
+  </head>
+  <body>
+
+    <!--
+      existen 3 formas de crear componentes usando react
+        + con clases
+        + con funciones
+        + con una function creadora de clases (no recomendable de usar pues se deprecara)
+    -->
+
+    <main id ="app">
+
+    </main>
+    <section id="app2">
+
+    </section>
+    <section id="app3">
+
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.js"></script>
+    <script type="text/babel">
+      /////////////////////////////////////////////////////////////////////////////////
+      // funcion pura creadora de componente
+      function ComponenteCreadoConFuncion(props){
+        const name = props.name;
+        return (
+          <h1 id="Title">
+            hey soy un componente creado con una funcion {name}
+          </h1>
+        )
+      }
+      const hola = React.createElement(ComponenteCreadoConFuncion,{
+        name: 'carlos' ,
+      });
+
+      ReactDOM.render(
+        <ComponenteCreadoConFuncion name="jsx" />,
+        document.getElementById("app")
+      );
+
+      /////////////////////////////////////////////////////////////////////////////////
+      // clase creadora de un componente
+      class MiComponenteCreadoConUnaClase extends React.Component {
+        constructor(props){
+          super(props); //obligatorio al etender React.Component
+          this.state = {
+            count: 0,
+          };
+          this.handleClick = this.handleClick.bind(this) // el bind pasa el this al conexto del miebro que definimos
+        }
+        handleClick(){
+          this.setState({
+            count: this.state.count + 1,
+          });
+        }
+
+        //render es obligatorio al etender React.Component
+        render(){
+          const name = this.props.name;
+          return(
+            <h2 id="MiComponenteCreadoConUnaClase" onMouseOver={this.handleClick}>
+              Hola {name} soy un elemento creado con una clase js : este es un contador {this.state.count}
+            </h2>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <MiComponenteCreadoConUnaClase name="AMIGO" />,
+        document.getElementById("app2")
+      );
+
+
+      /////////////////////////////////////////////////////////////////////////////////
+      // creacion de elemento con create class (se deprecara NO USAR)
+      const ComponenteCredoConCreateClass = React.createClass({
+        getInitialState(){
+          return{
+            count: 0,
+          };
+        },
+        handleClick(){
+          this.setState({
+            count: this.state.count +1,
+          });
+        },
+        render(){
+          const name = this.props.name;
+          return(
+            <h3 id="ComponenteCredoConCreateClass" onClick={this.handleClick}>
+              Hola {name} soy un elemento creado con create class, este metodo no debe ser usado pues sera deprecado, pero si me pinchas aumentare este contador :> {this.state.count}
+            </h3>
+          );
+        }
+
+      });
+      ReactDOM.render(
+        <ComponenteCredoConCreateClass name="AMIGO" />,
+        document.getElementById("app3")
+      );
+
+
+
+    </script>
+  </body>
+</html>
