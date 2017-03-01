@@ -5,7 +5,37 @@
     <title>hello World React</title>
   </head>
   <body>
+    <main id ="app">
+
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script type="text/javascript">
+      function Hola(props){
+        const name = props.name;
+        return React.DOM.h1({
+          id : 'Title',
+        },`hey ${name}`);
+      }
+      const hola = React.createElement(Hola,{
+        name: 'carlos' ,
+      });
+      ReactDOM.render(
+        hola,
+        document.getElementById("app")
+      );
+
+      setTimeout(
+        () => {
+          ReactDOM.render(
+            React.createElement(Hola,{ name: "azopotamdre esto cambio despues de 3 segundos!"}),
+            document.getElementById("app")
+          );
+        },
+        3000
+      );
+
+
+    </script>
   </body>
 </html>
